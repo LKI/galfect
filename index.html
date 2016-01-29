@@ -1,7 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Story</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <style type="text/css">
+    .pic-area {
+      height: 600px;
+      background: #66ccff;
+    }
+    .dia-area {
+      height: 200px;
+      background: grey;
+    }
+  </style>
+
+  <body>
+    <div class='container fill'>
+      <div class='pic-area row'></div>
+      <div class="dia-area row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <p id='dialog' class="lead"></p>
+        </div>
+        <div class="col-md-3">
+          <button id='reset' type="button" class="btn btn-primary btn-block size(;100)">reset</button>
+        </div>
+      </div>
+    </div>
+
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js'></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
       function type(id, str, pos) {
         var text = str.slice(0, pos);
@@ -11,23 +48,23 @@
       };
       function show(num) {
         if (num < strs.length) {
-          $('#dialog').fadeOut(500);
+          $('#dialog').fadeOut(200);
           setTimeout(function(){
             $('#dialog').fadeIn();
             type('dialog', strs[num], 0);
-          }, 500);
+          }, 200);
         }
       }
       var count = 0,
-          strs  = [
-            "春眠不觉晓",
-            "处处闻啼鸟",
-            "夜来风雨声",
-            "花落知多少",
-          ];
+      strs  = [
+      "春眠不觉晓",
+      "处处闻啼鸟",
+      "夜来风雨声",
+      "花落知多少",
+      ];
       $(document).ready(function(){
         show(0);
-        $('#container').click(function(){
+        $('#dialog').click(function(){
           count += 1;
           show(count);
         });
@@ -37,11 +74,5 @@
         });
       });
     </script>
-  </head>
-  <body>
-    <div id='container' style='width:300px;height:80px;background-color:grey;'>
-      <b id='dialog'></b>
-    </div>
-    <button id='reset'>reset</button>
   </body>
 </html>
