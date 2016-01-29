@@ -1,9 +1,13 @@
 .pic-area {
-  height: 600px;
+  padding-bottom: 45%;
   background: #66ccff;
 }
 
 .dia-area {
-  height: 200px;
+  padding-bottom: 10%;
   background: grey;
+}
+
+.dialog {
+  height: 21px;
 }

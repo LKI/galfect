@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Story</title>
+    <title>Show White</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -14,13 +14,13 @@
   </head>
 
   <body>
-    <div class='container fill'>
+    <div class='container'>
       <div class='pic-area row'></div>
       <div class="dia-area row">
         <div class="col-md-3" name="pic-area">
         </div>
         <div class="col-md-6">
-          <p id='dialog' class="lead"></p>
+          <p id='dialog' class="lead dialog"></p>
         </div>
         <div class="col-md-3">
           <button id='reset' type="button" class="btn btn-primary btn-block size(;100)">reset</button>
@@ -28,17 +28,28 @@
       </div>
     </div>
 
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script>
       var count = 0,
           id    = "dialog",
           strs  = [
-          "春眠不觉晓",
-          "处处闻啼鸟",
-          "夜来风雨声",
-          "花落知多少",
+          "Magic Mirror in my hand,",
+          "Who is the fairest in the land?",
+          "My Queen,",
+          "You are the fairest in the land.",
+          "When Snow White reaches the age of seven",
+          "Magic Mirror in my hand,",
+          "Who is the fairest in the land?",
+          "My Queen,",
+          "You are the fairest here so true.",
+          "But Snow White is a thousand times more beautiful than you.",
+          "Evil Queen became angry about this.",
+          "She enlist a huntsman to kill Snow White.",
+          "My little bear,",
+          "Should we go outside to play?",
+          "TBC",
           ];
       $(document).ready(function(){
         show(id, 0);
