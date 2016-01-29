@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js'></script>
     <script>
       function type(id, str, pos) {
         var text = str.slice(0, pos);
@@ -9,22 +9,39 @@
         if (text === str) return;
         return setTimeout(function(){type(id, str, pos + 1);}, 30);
       };
+      function show(num) {
+        if (num < strs.length) {
+          $('#dialog').fadeOut(500);
+          setTimeout(function(){
+            $('#dialog').fadeIn();
+            type('dialog', strs[num], 0);
+          }, 500);
+        }
+      }
+      var count = 0,
+          strs  = [
+            "春眠不觉晓",
+            "处处闻啼鸟",
+            "夜来风雨声",
+            "花落知多少",
+          ];
       $(document).ready(function(){
-        var count = 0;
-        $("#container").click(function(){
-          $("#dialog").fadeToggle();
+        show(0);
+        $('#container').click(function(){
           count += 1;
-          if (!(count & 1)) {
-            type('dialog', "Index " + count / 2, 0);
-          }
+          show(count);
+        });
+        $('#reset').click(function(){
+          count = 0;
+          show(count);
         });
       });
     </script>
   </head>
   <body>
-    <div id='container' style="width:300px;height:80px;background-color:grey;">
-      <b id='dialog'>Initial Content</b>
+    <div id='container' style='width:300px;height:80px;background-color:grey;'>
+      <b id='dialog'></b>
     </div>
+    <button id='reset'>reset</button>
   </body>
 </html>
-
