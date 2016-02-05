@@ -1,13 +1,24 @@
 .pic-area {
-  padding-bottom: 45%;
   background: #66ccff;
 }
 
 .dia-area {
-  padding-bottom: 10%;
   background: grey;
 }
 
 .dialog {
   height: 21px;
+}
+
+.ava-area {
+}
+
+.avatar {
+  width: 80%;
+  max-width: 200px;
+  border: none;
+}
+
+.scene {
+  width: 75%;
 }

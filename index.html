@@ -14,16 +14,19 @@
   </head>
 
   <body>
-    <div class='container'>
-      <div class='pic-area row'></div>
+    <div class="container">
+      <div class="pic-area row text-center">
+        <img id="scene" class="scene">
+      </div>
       <div class="dia-area row">
-        <div class="col-md-3" name="pic-area">
+        <div class="ava-area col-xs-3 text-center">
+          <img id="avatar" class="avatar">
         </div>
-        <div class="col-md-6">
-          <p id='dialog' class="lead dialog"></p>
+        <div class="col-xs-6">
+          <p id="dialog" class="lead dialog"></p>
         </div>
-        <div class="col-md-3">
-          <button id='reset' type="button" class="btn btn-primary btn-block size(;100)">reset</button>
+        <div class="col-xs-3">
+          <button id="reset" type="button" class="btn btn-primary btn-block size(;100)">reset</button>
         </div>
       </div>
     </div>
@@ -33,35 +36,101 @@
     <script src="js/main.js"></script>
     <script>
       var count = 0,
-          id    = "dialog",
           strs  = [
-          "Magic Mirror in my hand,",
-          "Who is the fairest in the land?",
-          "My Queen,",
-          "You are the fairest in the land.",
-          "When Snow White reaches the age of seven",
-          "Magic Mirror in my hand,",
-          "Who is the fairest in the land?",
-          "My Queen,",
-          "You are the fairest here so true.",
-          "But Snow White is a thousand times more beautiful than you.",
-          "Evil Queen became angry about this.",
-          "She enlist a huntsman to kill Snow White.",
-          "My little bear,",
-          "Should we go outside to play?",
-          "TBC",
+          {
+            dialog : "Magic Mirror in my hand,",
+            avatar : "avatar/queen.jpg",
+            scene  : "scene/castle.jpg",
+          },
+          {
+            dialog : "Who is the fairest in the land?",
+          },
+          {
+            dialog : "My Queen,",
+            avatar : "avatar/mirror.jpg",
+          },
+          {
+            dialog : "You are the fairest in the land.",
+          },
+          {
+            dialog : "When Snow White reaches the age of seven",
+            avatar : "//:0",
+          },
+          {
+            dialog : "Magic Mirror in my hand,",
+            avatar : "avatar/queen.jpg",
+          },
+          {
+            dialog : "Who is the fairest in the land?",
+          },
+          {
+            dialog : "My Queen,",
+            avatar : "avatar/mirror.jpg",
+          },
+          {
+            dialog : "You are the fairest here so true.",
+          },
+          {
+            dialog : "But Snow White is a thousand times more beautiful than you.",
+          },
+          {
+            dialog : "Evil Queen became angry about this.",
+            avatar : "//:0",
+          },
+          {
+            dialog : "She enlist a huntsman to kill Snow White.",
+          },
+          {
+            dialog : "My little bear,",
+            avatar : "avatar/white.jpg",
+            scene  : "scene/princess-room.jpg",
+          },
+          {
+            dialog : "Should we go outside to play?",
+          },
+          {
+            dialog : "TBC",
+          },
           ];
       $(document).ready(function(){
-        show(id, 0);
-        $('#'+id).click(function(){
+        show(0);
+        $("#dialog").click(function(){
           count += 1;
-          show(id, count);
+          show(count);
         });
-        $('#reset').click(function(){
+        $("#reset").click(function(){
           count = 0;
-          show(id, count);
+          show(count);
         });
       });
+
+      function typewriter(id, str, pos, n) {
+        if (count > n) return;
+        var text = str.slice(0, pos);
+        document.getElementById(id).innerHTML = text;
+        if (text === str) return;
+        return setTimeout(function(){typewriter(id, str, pos + 1, n);}, 30);
+      };
+
+      function show(num) {
+        if (num < strs.length) {
+          var info = strs[num];
+          console.log(info);
+          if (info.hasOwnProperty("dialog")) {
+            $("#dialog").fadeOut(200);
+            setTimeout(function(){
+              $("#dialog").fadeIn();
+              typewriter("dialog", info["dialog"], 0, count);
+            }, 200);
+          };
+          if (info.hasOwnProperty("avatar")) {
+            $("#avatar").attr("src", info["avatar"]);
+          }
+          if (info.hasOwnProperty("scene")) {
+            $("#scene").attr("src", info["scene"]);
+          }
+        }
+      }
     </script>
   </body>
 </html>
