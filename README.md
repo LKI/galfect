@@ -7,6 +7,7 @@ This project aims to provide a quick way to create your own story in html.
 
 * Improve visual effect using jQuery and bootstrap.
 * Implement Save/Load function using cookie(maybe)
+* Implement "View History" function
 * Write script translator in Ruby or Python or Perl
 
 ## Bug to Fix
