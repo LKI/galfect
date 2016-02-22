@@ -2,6 +2,7 @@ import re
 
 def analyze(lines):
     arr = []
+    pics = {}
     pos, scene, avatar = 1, '', ''
     while (pos < len(lines)):
         l = lines[pos]
@@ -13,11 +14,19 @@ def analyze(lines):
             avatar = '//:0'
         elif (re.match('-.*\(.*\):$', l)):
             avatar = re.match('-.*\((.*)\):$', l).group(1)
+        elif (re.match('\[(.*)\]:(.*)$', l)):
+            m = re.match('\[(.*)\]:(.*)$', l)
+            pics[m.group(1)] = m.group(2)
         elif (re.match('#\d+ .*', l)):
             scene = re.match('#\d+ (.*)', l).group(1)
         else:
             dialog = l
         arr.append({'scene': scene, 'avatar': avatar, 'dialog': dialog})
+    arr = map(lambda x:{
+        'dialog': x['dialog'],
+        'scene' : pics[x['scene']] if (x['scene'] in pics) else x['scene'],
+        'avatar': pics[x['avatar']] if (x['avatar'] in pics) else x['avatar']
+    }, arr)
     return arr
 
 def load(f):
@@ -41,4 +50,4 @@ def generate(output):
             print '},'
         pos += 1
 
-generate(analyze(load('templates/show_white/white.drama')))
+generate(analyze(load('../templates/show_white/white.drama')))
