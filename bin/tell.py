@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+
 import re
+import sys
+import os.path
 
 def analyze(lines):
     arr = []
@@ -50,4 +54,11 @@ def generate(output):
             print '},'
         pos += 1
 
-generate(analyze(load('../templates/show_white/white.drama')))
+if (len(sys.argv) < 2):
+    print "Please specify a file name."
+    exit(1)
+elif (not os.path.isfile(sys.argv[1])):
+    print sys.argv[1], "is not a file."
+    exit(1)
+else:
+    generate(analyze(load(sys.argv[1])))
