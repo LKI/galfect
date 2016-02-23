@@ -15,14 +15,16 @@
 
   <body>
     <div class="container">
-      <div class="pic-area row text-center">
+      <div id="choose" class="choose-area">
+      </div>
+      <div class="pic-area row text-center click-area">
         <img id="scene" class="scene">
       </div>
       <div class="dia-area row">
         <div class="ava-area col-xs-3 text-center">
           <img id="avatar" class="avatar">
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 click-area">
           <p id="dialog" class="lead dialog"></p>
         </div>
         <div class="col-xs-3">
@@ -35,79 +37,25 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script>
-      var count = 0,
-          strs  = [
-          {
-            dialog : "Magic Mirror in my hand,",
-            avatar : "avatar/queen.jpg",
-            scene  : "scene/castle.jpg",
-          },
-          {
-            dialog : "Who is the fairest in the land?",
-          },
-          {
-            dialog : "My Queen,",
-            avatar : "avatar/mirror.jpg",
-          },
-          {
-            dialog : "You are the fairest in the land.",
-          },
-          {
-            dialog : "When Snow White reaches the age of seven",
-            avatar : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
-          },
-          {
-            dialog : "Magic Mirror in my hand,",
-            avatar : "avatar/queen.jpg",
-          },
-          {
-            dialog : "Who is the fairest in the land?",
-          },
-          {
-            dialog : "My Queen,",
-            avatar : "avatar/mirror.jpg",
-          },
-          {
-            dialog : "You are the fairest here so true.",
-          },
-          {
-            dialog : "But Snow White is a thousand times more beautiful than you.",
-          },
-          {
-            dialog : "Evil Queen became angry about this.",
-            avatar : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
-          },
-          {
-            dialog : "She enlist a huntsman to kill Snow White.",
-          },
-          {
-            dialog : "My little bear,",
-            avatar : "avatar/white.jpg",
-            scene  : "scene/princess-room.jpg",
-          },
-          {
-            dialog : "Should we go outside to play?",
-          },
-          {
-            dialog : "TBC",
-          },
-          ];
+      var count = 0;
       $(document).ready(function(){
         show(0);
-        $("#dialog").click(function(){
-          count += 1;
-          show(count);
-        });
+        $(".click-area").click(nextDialog);
         $("#reset").click(function(){
+          $(".click-area").unbind('click');
+          $(".click-area").click(nextDialog);
           count = 0;
           show(count);
         });
       });
 
       function typewriter(id, str, pos, n) {
-        if (count > n) return;
+        if (count > n) {
+          $(id).html(str);
+          return;
+        };
         var text = str.slice(0, pos);
-        document.getElementById(id).innerHTML = text;
+        $(id).html(text);
         if (text === str) return;
         return setTimeout(function(){typewriter(id, str, pos + 1, n);}, 30);
       };
@@ -115,22 +63,49 @@
       function show(num) {
         if (num < strs.length) {
           var info = strs[num];
-          console.log(info);
-          if (info.hasOwnProperty("dialog")) {
-            $("#dialog").fadeOut(200);
-            setTimeout(function(){
-              $("#dialog").fadeIn();
-              typewriter("dialog", info["dialog"], 0, count);
-            }, 200);
-          };
-          if (info.hasOwnProperty("avatar")) {
-            $("#avatar").attr("src", info["avatar"]);
+          console.log(strs, num, info);
+          $('#choose').html("");
+          $('#choose').hide("");
+          if (info.hasOwnProperty("choose")) {
+            console.log(strs, num, info);
+            var ch = info["choose"], i = 0;
+            console.log("#choose"+i, ch, count);
+            Object.keys(ch).forEach(function (x) {
+              i+=1;
+              $('#choose').append('<button id="choose'+i+'" type="button" class="btn btn-primary btn-block size(;100)">'+x+'</button>');
+              $('#choose'+i).click(function(){
+                count = ch[x];
+                show(count);
+                console.log("im here ", x);
+                $('.click-area').click(nextDialog);
+                $('#choose').hide();
+              });
+            });
+            $('.click-area').unbind('click');
+            $('#choose').show();
           }
-          if (info.hasOwnProperty("scene")) {
-            $("#scene").attr("src", info["scene"]);
+          else {
+            if (info.hasOwnProperty("dialog")) {
+              $("#dialog").fadeOut(200);
+              setTimeout(function(){
+                $("#dialog").fadeIn();
+                typewriter("#dialog", info["dialog"], 0, count);
+              }, 200);
+            };
+            if (info.hasOwnProperty("avatar")) {
+              $("#avatar").attr("src", info["avatar"]);
+            }
+            if (info.hasOwnProperty("scene")) {
+              $("#scene").attr("src", info["scene"]);
+            }
           }
         }
       }
+
+      function nextDialog() {
+        count += 1;
+        show(count);
+      };
     </script>
   </body>
 </html>
