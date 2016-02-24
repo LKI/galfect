@@ -24,16 +24,16 @@ Show White
 -Show White(white):
     My little bear,
     Should we go outside to play?
-// > Go outside(3)
-// > Stay at home(4)
+> Go outside(3)
+> Stay at home(4)
 
 #3 outside
     TBC
-// * END
+* END To Be Continue
 
-// #4 princess-room
-//     TBC
-// * END
+#4 princess-room
+    TBC
+* END To Be Continue
 
 // Pic Url Translation
 [princess-room]:scene/princess-room.jpg
