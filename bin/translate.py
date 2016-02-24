@@ -36,6 +36,7 @@ def analyze(lines):
             m = res['scene'].match(l)
             chapter = m.group(1)
             scene = m.group(2) or empty_img
+            avatar = empty_img
         elif res['end'].match(l):
             end = res['end'].match(l).group(1) or 'END'
         elif res['choose'].match(l):
