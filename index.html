@@ -78,9 +78,9 @@
               $('#choose').append('<button id="choose'+i+'" type="button" class="btn btn-primary btn-block size(;100)">'+x+'</button>');
               $('#choose'+i).click(function(){
                 count = ch[x];
-                show(count);
                 $('.click-area').click(nextDialog);
                 $('#choose').hide();
+                show(count);
               });
             });
             $('.click-area').unbind('click');
