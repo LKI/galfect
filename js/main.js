@@ -55,6 +55,6 @@ var strs = [
   },
   {
     avatar : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
-    dialog : "To Be Continue",
-  }
+    end : "To Be Continue"
+  },
 ];

@@ -63,20 +63,22 @@
       function show(num) {
         if (num < strs.length) {
           var info = strs[num];
-          console.log(strs, num, info);
           $('#choose').html("");
           $('#choose').hide("");
-          if (info.hasOwnProperty("choose")) {
-            console.log(strs, num, info);
+          if (info.hasOwnProperty("end")) {
+            $('.click-area').unbind('click');
+            showDialog(info["end"]);
+            showAvatar(info);
+            showScene(info);
+          }
+          else if (info.hasOwnProperty("choose")) {
             var ch = info["choose"], i = 0;
-            console.log("#choose"+i, ch, count);
             Object.keys(ch).forEach(function (x) {
               i+=1;
               $('#choose').append('<button id="choose'+i+'" type="button" class="btn btn-primary btn-block size(;100)">'+x+'</button>');
               $('#choose'+i).click(function(){
                 count = ch[x];
                 show(count);
-                console.log("im here ", x);
                 $('.click-area').click(nextDialog);
                 $('#choose').hide();
               });
@@ -86,19 +88,29 @@
           }
           else {
             if (info.hasOwnProperty("dialog")) {
-              $("#dialog").fadeOut(200);
-              setTimeout(function(){
-                $("#dialog").fadeIn();
-                typewriter("#dialog", info["dialog"], 0, count);
-              }, 200);
+              showDialog(info["dialog"]);
             };
-            if (info.hasOwnProperty("avatar")) {
-              $("#avatar").attr("src", info["avatar"]);
-            }
-            if (info.hasOwnProperty("scene")) {
-              $("#scene").attr("src", info["scene"]);
-            }
+            showAvatar(info);
+            showScene(info);
           }
+        }
+      }
+
+      function showDialog(dialog) {
+        $("#dialog").fadeOut(200);
+        setTimeout(function(){
+          $("#dialog").fadeIn();
+          typewriter("#dialog", dialog, 0, count);
+        }, 200);
+      }
+      function showAvatar(info) {
+        if (info.hasOwnProperty("avatar")) {
+          $("#avatar").attr("src", info["avatar"]);
+        }
+      }
+      function showScene(info) {
+        if (info.hasOwnProperty("scene")) {
+          $("#scene").attr("src", info["scene"]);
         }
       }
 
