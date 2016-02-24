@@ -1,17 +1,18 @@
-# Story Effect
+# Galfect
 
-This project aims to provide a quick way to create your own story in html.
-(I want to learn html&js in practice)
+This is a quick tool converting a drama to html.
+You can see a simple demo in [here][liriansu.com]
 
-## TODOs
+Project name come from "**gal**game ef**fect**".
 
-* Have a better name of the project
-* Improve visual effect using jQuery and bootstrap.
-* Implement choose
-* Implement Save/Load function using cookie(maybe)
-* Implement "View History" function
-* Write setup script for python
+This is also a project for me to learn html&js.
 
-## Bug to Fix
+# Installation
 
-* Quick click in dialog area will cause chaos type writer effect
+```
+    git clone https://github.com/LKI/galfect.git
+```
+
+Then use `bin/tell.py templates/snow_white/white.drama`.
+
+[liriansu.com]: http://liriansu.com/story
