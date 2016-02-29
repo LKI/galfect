@@ -13,6 +13,6 @@ This is also a project for me to learn html&js.
     git clone https://github.com/LKI/galfect.git
 ```
 
-Then use `bin/tell.py templates/snow_white/white.drama`.
+Then use `bin/translate.py templates/snow_white/white.drama`.
 
 [liriansu.com]: http://liriansu.com/story
