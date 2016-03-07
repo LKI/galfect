@@ -86,11 +86,15 @@ def load(f):
 def generate(output):
     print 'var strs=' + str(output) + ';'
 
-if (len(sys.argv) < 2):
-    print "Please specify a file name."
-    exit(1)
-elif (not os.path.isfile(sys.argv[1])):
-    print sys.argv[1], "is not a file."
-    exit(1)
-else:
-    generate(analyze(load(sys.argv[1])))
+def execute(argv=None):
+    if argv is None:
+        argv = sys.argv
+    if (len(sys.argv) < 2):
+        print "Please specify a file name."
+        exit(1)
+    elif (not os.path.isfile(sys.argv[1])):
+        print sys.argv[1], "is not a file."
+        exit(1)
+    else:
+        generate(analyze(load(sys.argv[1])))
+
