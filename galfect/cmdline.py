@@ -2,8 +2,9 @@
 
 import re
 import sys
-import os.path
+import os.path as op
 import argparse as ap
+from galfect.initialize import GalfectInitialize
 
 # Initialize
 res = {
@@ -82,27 +83,42 @@ def analyze(lines):
 
 def load(f):
     fh = open(f, 'r')
-    return map(str.strip, fh.readlines())
+    content = fh.readlines()
+    fh.close()
+    return map(str.strip, content)
 
-def generate(output):
-    print 'var strs=' + str(output) + ';'
+def generate(outdir, output):
+    fh = open(op.join(outdir, 'js', 'main.js'), 'w')
+    fh.write('var strs=' + str(output) + ';')
+    fh.close()
 
 def execute(argv=None):
     if argv is None:
         argv = sys.argv
-    parser = ap.ArgumentParser(description='tranfer drama file to html pages')
+    parser = ap.ArgumentParser(
+        description='tranfer drama file to html pages'
+    )
     parser.add_argument(
         '-output',
         help='specify the output',
-        default='main.js',
     )
     parser.add_argument(
         'drama_file',
         help='the drama file',
     )
     args = parser.parse_args()
-    if (not os.path.isfile(args.drama_file)):
-        print args.drama_file, "is not a file."
+    drama = args.drama_file
+    if not op.isfile(drama):
+        print drama, "is not a file."
         exit(1)
     else:
-        generate(analyze(load(args.drama_file)))
+        outdir = args.output or op.basename(op.splitext(drama)[0])
+        if op.exists(outdir):
+            prompt = outdir + " already exists.\n  Do you want to override it?[Y]es/[N]o:"
+            out = raw_input(prompt)
+            while (out.lower() != 'y' and out.lower() !='n'):
+                out = raw_input(prompt)
+            if out == 'n':
+                exit(0)
+        GalfectInitialize(outdir).run()
+        generate(outdir, analyze(load(drama)))

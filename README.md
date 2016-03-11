@@ -15,8 +15,8 @@ This is also a project for me to learn html&js.
 
 Then use `galfect templates/snow_white/white.drama`.
 
-This would generate javascript which should be put in [main.js](js/main.js)
+This would generate an individual repository named *white*.
 
-Then use your browser to open [index.html](index.html)
+You can open *white/index.html* in your browser to see the result.
 
 [liriansu.com]: http://liriansu.com/story
