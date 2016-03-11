@@ -3,6 +3,7 @@
 import re
 import sys
 import os.path
+import argparse as ap
 
 # Initialize
 res = {
@@ -89,12 +90,19 @@ def generate(output):
 def execute(argv=None):
     if argv is None:
         argv = sys.argv
-    if (len(sys.argv) < 2):
-        print "Please specify a file name."
-        exit(1)
-    elif (not os.path.isfile(sys.argv[1])):
-        print sys.argv[1], "is not a file."
+    parser = ap.ArgumentParser(description='tranfer drama file to html pages')
+    parser.add_argument(
+        '-output',
+        help='specify the output',
+        default='main.js',
+    )
+    parser.add_argument(
+        'drama_file',
+        help='the drama file',
+    )
+    args = parser.parse_args()
+    if (not os.path.isfile(args.drama_file)):
+        print args.drama_file, "is not a file."
         exit(1)
     else:
-        generate(analyze(load(sys.argv[1])))
-
+        generate(analyze(load(args.drama_file)))
