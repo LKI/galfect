@@ -27,7 +27,7 @@ datafiles = [
 
 setup(
     name='galfect',
-    version='0.3.0',
+    version='0.3.1',
     author='Lirian Su',
     author_email='liriansu@gmail.com',
     url='https://github.com/LKI/galfect',
