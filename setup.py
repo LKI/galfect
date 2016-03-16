@@ -1,9 +1,6 @@
 from setuptools import setup
-import markdown
 import os.path
-import re
 
-tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
 datafiles = [
     'bootstrap/css/bootstrap-theme.css',
     'bootstrap/css/bootstrap-theme.css.map',
@@ -27,13 +24,13 @@ datafiles = [
 
 setup(
     name='galfect',
-    version='0.3.1',
+    version='0.3.2',
     author='Lirian Su',
     author_email='liriansu@gmail.com',
     url='https://github.com/LKI/galfect',
     license='Creative Commons Attribution-Noncommercial-Share Alike license',
     description='Converting drama text to html pages',
-    long_description=tag_re.sub('', markdown.markdown(open('README.md').read())),
+    long_description=open('README.rst').read(),
     entry_points={
         'console_scripts': ['galfect = galfect.cmdline:execute']
     },

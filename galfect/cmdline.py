@@ -5,6 +5,9 @@ import sys
 import os.path as op
 import argparse as ap
 from galfect.initialize import GalfectInitialize
+from tempfile import mkstemp
+from shutil import move
+from os import remove, close
 
 # Initialize
 res = {
@@ -19,10 +22,23 @@ res = {
 for key in res:
     res[key] = re.compile(res[key])
 empty_img = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+title = ''
+
+def replace_title(path, text):
+    fh, abs_path = mkstemp()
+    with open(abs_path,'w') as new_file:
+        with open(path) as old_file:
+            for line in old_file:
+                new_file.write(line.replace('<title>Show White</title>', text))
+    close(fh)
+    remove(path)
+    move(abs_path, path)
 
 # Analyze drama lines and get an array full of metadata
 def analyze(lines):
     chapter, pos, scene, avatar, url, chaps, states = 0, 1, '', '', {}, {}, []
+    global title
+    title = '<title>' + lines[0] + '</title>'
     n = len(lines)
     while (pos < n):
         l = lines[pos]
@@ -122,3 +138,4 @@ def execute(argv=None):
                 exit(0)
         GalfectInitialize(outdir).run()
         generate(outdir, analyze(load(drama)))
+        replace_title(op.join(outdir, 'index.html'), title)
