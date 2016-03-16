@@ -5,7 +5,7 @@ Galfect
 This is a quick command line tool converting a drama to html.
 You can see a quick demo in http://liriansu.com/galfect
 
-Project name come from '**gal**game ef**fect**'.
+Project name come from '**galgame effect**'.
 
 Project source code is hosted on https://github.com/LKI/galfect
 
